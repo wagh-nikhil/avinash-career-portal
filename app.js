@@ -42,67 +42,67 @@ const DEFAULT_APPLICATIONS = [
   {
     id: "app-1",
     company: "Equinix India",
-    role: "Lead Solutions Engineer – Data Center Infrastructure & Security",
-    location: "Mumbai / Navi Mumbai",
+    role: "Assistant Manager, Data Center Critical Facilities",
+    location: "Mumbai, Maharashtra",
     matchScore: 98,
     dateApplied: "2026-09-27",
     status: "Interviewing",
-    portal: "Equinix Careers / Workday",
-    jobUrl: "https://careers.equinix.com/jobs/search?q=India",
+    portal: "Equinix Careers / Workday (JR-159303)",
+    jobUrl: "https://careers.equinix.com/jobs/assisatant-manager-data-center-critical-facilities-mumbai-india",
     resumeUsed: "Track 2: Data Center Solutions Resume",
-    notes: "Technical interview scheduled. Focus on OCI DC Operations certification, MEP/BMS alignment, and client walkthroughs."
+    notes: "Applied for Job ID JR-159303 in Mumbai. Focus on OCI DC Operations certification, MEP/BMS alignment, and client walkthroughs."
   },
   {
     id: "app-2",
     company: "Amazon Web Services (AWS)",
-    role: "Cluster Security Manager – Infrastructure Physical Security",
-    location: "Mumbai",
+    role: "Security Program Manager, Infrastructure Physical Security",
+    location: "Mumbai, Maharashtra",
     matchScore: 97,
     dateApplied: "2026-09-28",
     status: "Applied",
-    portal: "Amazon Jobs",
-    jobUrl: "https://www.amazon.jobs/en/search?base_query=Data+Center+Security&country=IND",
+    portal: "Amazon.jobs (10561060)",
+    jobUrl: "https://www.amazon.jobs/en/jobs/10561060/security-program-manager-infrastructure-physical-security",
     resumeUsed: "Track 1: Physical Security PM Resume",
-    notes: "Submitted application for Cluster Security Manager. Highlighted Lenel/Genetec certs and Oracle T&A leadership."
+    notes: "Submitted application for Job ID 10561060 with ADSIPL Mumbai. Highlighted Lenel/Genetec certs and Oracle T&A leadership."
   },
   {
     id: "app-3",
     company: "Mastercard",
-    role: "Senior Program Manager – Corporate Security & Infrastructure (Alumni Re-hire)",
-    location: "Pune",
+    role: "Senior Security Monitoring & Incident Lead (Alumni Re-hire)",
+    location: "Pune, Maharashtra",
     matchScore: 97,
     dateApplied: "2026-09-25",
     status: "Interviewing",
-    portal: "Alumni Direct / Workday",
-    jobUrl: "https://mastercard.wd1.myworkdayjobs.com",
+    portal: "Mastercard Workday (R-280330)",
+    jobUrl: "https://mastercard.wd1.myworkdayjobs.com/CorporateCareers/job/Pune-India/Senior-Security-Monitoring-and-Response-Analyst--Incident-Responder-_R-280330",
     resumeUsed: "Track 1: Physical Security PM Resume",
-    notes: "Connected with former director. Discussed returning with expanded hyperscale program leadership experience."
+    notes: "Alumni advantage application for Requisition R-280330 in Pune. Emphasized Corporate Innovation Award and SecOps leadership."
   },
   {
     id: "app-4",
     company: "Johnson Controls",
-    role: "Critical Infrastructure Commissioning Lead / Project Manager",
-    location: "Bengaluru",
+    role: "Project Engineer – Critical Facility & Fire/Security Systems",
+    location: "Bengaluru / Pune",
     matchScore: 95,
     dateApplied: "2026-09-26",
     status: "Follow-up",
-    portal: "JCI Careers",
-    jobUrl: "https://jobs.johnsoncontrols.com",
+    portal: "Johnson Controls Workday (WD30273125)",
+    jobUrl: "https://jobs.johnsoncontrols.com/search-jobs/India/Security?glat=20.593684&glon=78.96288",
     resumeUsed: "Track 3: Commissioning Lead Resume",
-    notes: "Followed up on site turnover and punch-list defect closure experience across critical facilities."
+    notes: "Requisition WD30273125: Followed up on site turnover and punch-list defect closure experience across critical facilities."
   },
   {
     id: "app-5",
     company: "Microsoft",
-    role: "Senior Security Program Manager – Datacenter Operations",
+    role: "Senior Physical Security Program Manager – Datacenter Operations",
     location: "Pune / Bengaluru",
     matchScore: 96,
     dateApplied: "2026-09-29",
     status: "Saved",
-    portal: "Microsoft Careers",
-    jobUrl: "https://careers.microsoft.com",
+    portal: "Microsoft Careers (MS-DC-SEC-IN)",
+    jobUrl: "https://careers.microsoft.com/us/en/search-results?q=Physical%20Security&location=India",
     resumeUsed: "Track 1: Physical Security PM Resume",
-    notes: "Targeting upcoming opening. Prepared tailored outreach pitch for Microsoft recruiter."
+    notes: "Targeting Datacenter Physical Security opening. Prepared tailored outreach pitch for Microsoft recruiter."
   }
 ];
 
@@ -135,7 +135,7 @@ function loadJobsData() {
 
 // Applications CRM Storage
 function initApplications() {
-  const stored = localStorage.getItem('avinash_applications_v2');
+  const stored = localStorage.getItem('avinash_applications_v3');
   if (stored) {
     try {
       state.applications = JSON.parse(stored);
@@ -150,7 +150,7 @@ function initApplications() {
 }
 
 function saveApplications() {
-  localStorage.setItem('avinash_applications_v2', JSON.stringify(state.applications));
+  localStorage.setItem('avinash_applications_v3', JSON.stringify(state.applications));
 }
 
 // Theme handling
@@ -409,9 +409,25 @@ function renderJobs() {
             </div>
           </div>
 
-          <!-- Job Role Title -->
-          <h5 class="text-sm font-bold text-sky-400 mb-2.5 leading-snug">
-            ${escapeHtml(job.role)}
+          <!-- Requisition ID & Verified Status Badge -->
+          <div class="flex items-center gap-2 mb-2 flex-wrap">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-500/15 text-sky-300 border border-sky-500/30">
+              <i data-lucide="shield-check" class="w-3 h-3 text-sky-400"></i> ${escapeHtml(job.priority || 'Verified Opening')}
+            </span>
+            ${job.jobId ? `
+              <button onclick="copyJobId('${job.jobId}')" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-mono font-bold bg-slate-800 text-amber-300 border border-amber-500/30 hover:bg-slate-700 transition" title="Click to copy Job ID / Requisition #">
+                <i data-lucide="hash" class="w-3 h-3 text-amber-400"></i> Req: ${escapeHtml(job.jobId)}
+                <i data-lucide="copy" class="w-2.5 h-2.5 opacity-70"></i>
+              </button>
+            ` : ''}
+          </div>
+
+          <!-- Job Role Title (Clickable Direct Apply Link) -->
+          <h5 class="text-sm font-bold text-white mb-2.5 leading-snug">
+            <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" class="hover:text-sky-300 transition inline-flex items-center gap-1.5 group/link">
+              <span>${escapeHtml(job.role)}</span>
+              <i data-lucide="external-link" class="w-3 h-3 text-sky-400 opacity-80 group-hover/link:opacity-100 transition shrink-0"></i>
+            </a>
           </h5>
 
           <!-- Top 3 Reasons Why He Matches -->
@@ -457,30 +473,36 @@ function renderJobs() {
         <!-- Action Buttons -->
         <div class="pt-3 border-t border-slate-800 space-y-2">
           <div class="grid grid-cols-2 gap-2">
-            <!-- Apply Link -->
+            <!-- Direct Apply Link -->
             <a href="${job.applyUrl}" target="_blank" rel="noopener noreferrer" 
-               class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition shadow-sm shadow-sky-600/30">
-              <span>Apply on Portal</span>
+               class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition shadow-sm shadow-sky-600/30 text-center">
+              <span>Direct Apply</span>
               <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
             </a>
 
             <!-- Quick Track Button -->
             <button onclick="quickTrackJob('${job.id}')" 
-                    class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition">
+                    class="inline-flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-bold border border-slate-700 transition text-center">
               <i data-lucide="bookmark-plus" class="w-3.5 h-3.5 text-emerald-400"></i>
               <span>Add to Tracker</span>
             </button>
           </div>
 
-          <!-- Secondary Actions: InMail Pitch & Details -->
-          <div class="flex items-center justify-between text-xs pt-1">
+          <!-- Secondary Actions: Alternate Link / Workday, InMail Pitch & Details -->
+          <div class="flex items-center justify-between text-xs pt-1 flex-wrap gap-1">
             <button onclick="copyJobPitch('${job.id}')" 
                     class="text-indigo-400 hover:text-indigo-300 text-[11px] font-semibold flex items-center gap-1 transition">
-              <i data-lucide="mail" class="w-3 h-3"></i> Copy Tailored InMail Pitch
+              <i data-lucide="mail" class="w-3 h-3"></i> Tailored Pitch
             </button>
+            ${job.alternateApplyUrl ? `
+              <a href="${job.alternateApplyUrl}" target="_blank" rel="noopener noreferrer"
+                 class="text-slate-400 hover:text-sky-300 text-[11px] font-medium flex items-center gap-1 transition" title="Careers / Workday portal search">
+                <i data-lucide="compass" class="w-3 h-3 text-slate-500"></i> Portal Link
+              </a>
+            ` : ''}
             <button onclick="openJobDetailsModal('${job.id}')" 
                     class="text-slate-400 hover:text-white text-[11px] font-medium flex items-center gap-1 transition">
-              <i data-lucide="info" class="w-3 h-3"></i> Full Rationale
+              <i data-lucide="info" class="w-3 h-3"></i> Full Details
             </button>
           </div>
         </div>
@@ -533,6 +555,12 @@ function quickTrackJob(jobId) {
   showToast(`Added ${job.company} to your Application Tracker!`);
 }
 
+// 1-Click Copy Requisition ID
+function copyJobId(jobId) {
+  if (!jobId) return;
+  copyToClipboard(jobId, `Requisition ID "${jobId}" copied to clipboard!`);
+}
+
 // 1-Click Copy InMail Pitch
 function copyJobPitch(jobId) {
   const job = state.matchedJobs.find(j => j.id === jobId);
@@ -551,6 +579,16 @@ function openJobDetailsModal(jobId) {
   document.getElementById('details-match-score').textContent = `${job.matchScore}% Likelihood Fit`;
   document.getElementById('details-location').textContent = job.location;
   document.getElementById('details-resume-text').textContent = job.recommendedResumeTitle;
+
+  const idBadge = document.getElementById('details-job-id');
+  if (idBadge) {
+    if (job.jobId) {
+      idBadge.textContent = `Req ID: ${job.jobId}`;
+      idBadge.classList.remove('hidden');
+    } else {
+      idBadge.classList.add('hidden');
+    }
+  }
   
   const resumeDownloadBtn = document.getElementById('details-resume-download-btn');
   if (resumeDownloadBtn) {
@@ -559,7 +597,20 @@ function openJobDetailsModal(jobId) {
   }
 
   const applyBtn = document.getElementById('details-apply-btn');
-  if (applyBtn) applyBtn.href = job.applyUrl;
+  if (applyBtn) {
+    applyBtn.href = job.applyUrl;
+    applyBtn.innerHTML = `<span>Apply to Direct Requisition ${job.jobId ? '(' + escapeHtml(job.jobId) + ')' : ''}</span><i data-lucide="external-link" class="w-3.5 h-3.5"></i>`;
+  }
+
+  const altApplyBtn = document.getElementById('details-alt-apply-btn');
+  if (altApplyBtn) {
+    if (job.alternateApplyUrl) {
+      altApplyBtn.href = job.alternateApplyUrl;
+      altApplyBtn.classList.remove('hidden');
+    } else {
+      altApplyBtn.classList.add('hidden');
+    }
+  }
 
   const reasonsList = document.getElementById('details-reasons-list');
   if (reasonsList) {
@@ -1025,6 +1076,7 @@ window.setActiveFilter = setActiveFilter;
 window.resetFilters = resetFilters;
 window.quickTrackJob = quickTrackJob;
 window.copyJobPitch = copyJobPitch;
+window.copyJobId = copyJobId;
 window.openJobDetailsModal = openJobDetailsModal;
 window.closeDetailsModal = closeDetailsModal;
 window.updateApplicationStatus = updateApplicationStatus;

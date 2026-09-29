@@ -80,6 +80,7 @@ def build_email_digest(jobs):
         score = j.get("matchScore", 90)
         score_color = "#10b981" if score >= 95 else "#0ea5e9"
         alumni_badge = """<span style="background-color: #064e3b; color: #6ee7b7; font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">Alumni Advantage</span>""" if j.get("alumniAdvantage") else ""
+        job_id_badge = f"""<span style="background-color: #1e293b; color: #fbbf24; font-size: 10px; font-family: monospace; font-weight: bold; padding: 2px 6px; border-radius: 4px; margin-left: 6px; border: 1px solid rgba(251, 191, 36, 0.3);">Req: {j['jobId']}</span>""" if j.get("jobId") else ""
 
         reasons_html = "".join([f"<li style='margin-bottom: 3px;'>{r}</li>" for r in j.get("keyReasons", [])[:2]])
 
@@ -89,10 +90,10 @@ def build_email_digest(jobs):
             <tr>
               <td align="left" style="vertical-align: top;">
                 <h3 style="margin: 0 0 4px 0; color: #ffffff; font-size: 16px; font-weight: bold;">
-                  {j['company']} {alumni_badge}
+                  {j['company']} {job_id_badge} {alumni_badge}
                 </h3>
                 <div style="color: #38bdf8; font-size: 14px; font-weight: 600; margin-bottom: 6px;">
-                  {j['role']}
+                  <a href="{j['applyUrl']}" target="_blank" style="color: #38bdf8; text-decoration: none;">{j['role']} &rarr;</a>
                 </div>
                 <div style="color: #94a3b8; font-size: 12px; margin-bottom: 8px;">
                   📍 {j['location']} &nbsp;•&nbsp; 💰 {j.get('salaryBand', 'Competitive Tech CTC')}
@@ -121,7 +122,7 @@ def build_email_digest(jobs):
               </td>
               <td align="right">
                 <a href="{j['applyUrl']}" target="_blank" style="background-color: #0284c7; color: #ffffff; text-decoration: none; padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: bold; display: inline-block;">
-                  Apply on Portal &rarr;
+                  Direct Apply &rarr;
                 </a>
               </td>
             </tr>
