@@ -4,17 +4,46 @@
 > Tailored for **Avinash Jadhav** (14+ Years Enterprise Engineering & Program Leadership — Ex-Oracle, Mastercard, Wells Fargo, Tyco, Siemens).
 
 [![GitHub Pages Ready](https://img.shields.io/badge/GitHub%20Pages-Ready-emerald?style=for-the-badge&logo=github)](https://pages.github.com/)
+[![Daily Job Crawler](https://img.shields.io/badge/Daily_Auto_Refresh-9:00_AM_IST-purple?style=for-the-badge&logo=githubactions)](https://github.com/wagh-nikhil/avinash-career-portal/actions)
+[![Email Alert](https://img.shields.io/badge/Daily_Email_Alert-Automated-success?style=for-the-badge&logo=gmail)](mailto:ajadhav311989@gmail.com)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38BDF8?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![Pure Static](https://img.shields.io/badge/Architecture-Pure_Static_Zero_Build-blue?style=for-the-badge)](https://developer.mozilla.org/)
-[![Status](https://img.shields.io/badge/Status-Production_Ready-success?style=for-the-badge)](#)
 
 ---
 
 ## 📌 Executive Summary
 
-Following recent corporate restructuring at Oracle, this dashboard was engineered to provide Avinash Jadhav with an unfair speed-and-precision advantage in the Indian and APAC talent market. 
+Following recent corporate restructuring at Oracle, this dashboard was engineered to provide Avinash Jadhav with an automated talent intelligence command center in the Indian and APAC talent market. 
 
-It unifies **3 distinct career tracks**, pre-filters **90+ boolean search deep-links** across major portals, catalogs **29+ curated Indian employers** (Hyperscalers, GCCs, Integrators), includes **3 ATS-optimized resume PDFs**, provides an **Interactive Job Application CRM (LocalStorage backed)**, and features a **Cold InMail Outreach Studio**.
+It features:
+1. **Automated Daily Job Refresh & Email Alert**: Scans Indian job openings every morning at **9:00 AM IST** via GitHub Actions, recalculates percentage likelihoods, and emails an executive HTML digest directly to `ajadhav311989@gmail.com`.
+2. **Curated Job Match Recommendations**: 20 verified active openings ranked by calculated match likelihood (e.g. Equinix 98%, AWS 97%, Mastercard 97%, Microsoft 96%, Johnson Controls 95%).
+3. **Instant Job Fit Calculator**: Paste any job description from LinkedIn/Naukri to get an instant % match score and resume attachment recommendation.
+4. **Interactive Applications CRM**: Client-side Kanban/Table tracker with 1-click status updates and Excel/CSV export.
+5. **3 Calibrated ATS-Compliant Resumes**: Ready-to-download PDFs in `assets/resumes/`.
+
+---
+
+## ⏰ Automated Daily Refresh & Daily Email Alerts
+
+The dashboard is equipped with an automated GitHub Actions cron workflow:
+- **File**: [`.github/workflows/daily_job_crawler.yml`](.github/workflows/daily_job_crawler.yml)
+- **Schedule**: Every day at **09:00 AM IST** (`03:30 UTC`), or on-demand via **Actions > Run workflow**.
+- **What it does**:
+  1. Executes [`scripts/daily_job_crawler.py`](scripts/daily_job_crawler.py).
+  2. Scans and refreshes active openings across India, updating `data/matched_jobs.json` and `docs/`.
+  3. Formats an executive HTML email digest with top daily jobs, match scores, and 1-click apply links.
+  4. Dispatches the email digest directly to Avinash (`ajadhav311989@gmail.com`).
+  5. Commits any new updates to GitHub automatically to keep GitHub Pages live and fresh!
+
+### 🔑 Setting Up Email Delivery in GitHub (2 Minutes)
+To enable GitHub Actions to send emails to Avinash:
+1. Go to your repository on GitHub: **Settings** > **Secrets and variables** > **Actions**.
+2. Click **New repository secret** and add:
+   - `EMAIL_USERNAME`: Your sender email address (e.g., your Gmail address).
+   - `EMAIL_PASSWORD`: Your 16-character **Google App Password** *(generate from your Google Account > Security > 2-Step Verification > App passwords)*.
+   - `ALERT_RECIPIENT`: `ajadhav311989@gmail.com` *(optional, already the default)*.
+3. Done! The workflow will now automatically email Avinash his daily match digest every morning at 9:00 AM IST!
 
 ---
 
