@@ -517,4 +517,3 @@ window.MATCHED_JOBS = [
     "outreachTemplate": "Hi [Wells Fargo Talent Acquisition],\n\nAs a Wells Fargo alumnus (2015–2017) who executed enterprise access control expansions, I am reaching out to reconnect regarding Senior Physical Security Technology roles in Bengaluru. Since my time at Wells Fargo, I have managed regional security technology programs at Mastercard and Oracle.\n\nI would be excited to bring my 14+ years of leadership back to Wells Fargo.\n\nBest regards,\nAvinash Jadhav\n+91 9901071166 | ajadhav311989@gmail.com"
   }
 ];
-if (typeof module !== 'undefined' && module.exports) { module.exports = window.MATCHED_JOBS; }
